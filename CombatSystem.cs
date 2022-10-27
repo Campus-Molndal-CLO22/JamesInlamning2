@@ -30,35 +30,54 @@ namespace WorldOfGiants
             {
                 do
                 {
+                    System.Threading.Thread.Sleep(500);
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine("\n--- PLAYER TURN ---\n");
                     Console.ResetColor();
                     Console.WriteLine("1. Attack");
                     Console.WriteLine("2. Use Health Potion");
                     Console.WriteLine("3. Flee");
-                    
-                    int option = int.Parse(Console.ReadLine());
-                    
+
+                    int option;
+
+                    do
+                    {
+                        Int32.TryParse(Console.ReadLine(), out option);
+                        if (option > 3 || option < 1)
+                        {
+                            Console.WriteLine("\nTry again! Use keys 1, 2 or 3 to select action.");
+
+                        }
+                    } while (option > 3 || option < 1);
 
                     if (option == 1)
                     {
                         Console.Clear();
                         PlayerAttack(player, goliath, weapon);
+                        MonsterAttack();
+                        
                     }
                     else if (option == 2)
                     {
                         HealthPotion healthPotion = new HealthPotion("Health Potion", 25);
                         healthPotion.Heal(player);
                         Console.Clear();
+                        System.Threading.Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("--- HEAL ---");
                         Console.ResetColor();
-                        Console.WriteLine("You heal yourself for 25 health points!");
-                        Console.WriteLine($"You now have {player.HealthPoints} health.\n");
+    
+                        Console.WriteLine("\nYou heal yourself for 25 health points!");
+                        Console.WriteLine($"\nYou now have {player.HealthPoints} health.\n");
+                      
+                        MonsterAttack();
+                        
                     }
                     else if (option == 3)
                     {
                         Console.Clear();
+
+                        System.Threading.Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("---  FLEE ---");
                         Console.ResetColor();
@@ -68,14 +87,10 @@ namespace WorldOfGiants
                         System.Threading.Thread.Sleep(500);
                         gm.Menu(player);
                     }
-                    else
-                    {
-                        Console.WriteLine("Try again! Use keys 1, 2 or 3 to select action.");
-                    }
+                    
 
                     
-                    MonsterAttack();
-                    System.Threading.Thread.Sleep(500);
+                    
 
                 } while (goliath.HealthPoints > 0 && player.HealthPoints > 0);
 
@@ -83,9 +98,11 @@ namespace WorldOfGiants
 
                 void MonsterAttack()
                 {
+                    System.Threading.Thread.Sleep(500);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("--- ENEMY TURN --- \n");
                     Console.ResetColor();
+
                     int monsterattack = goliath.MonsterAttack * player.Level / 3;
                     player.HealthPoints -= monsterattack;
                     Console.WriteLine($"{goliath.Name} strikes you, dealing {monsterattack} damage!\n");
@@ -106,7 +123,17 @@ namespace WorldOfGiants
                             Console.WriteLine("1. Yes.");
                             Console.WriteLine("2. No, quit game.");
 
-                            int option = int.Parse(Console.ReadLine());
+                            int option;
+
+                            do
+                            {
+                                Int32.TryParse(Console.ReadLine(), out option);
+                                if (option != 1 || option != 2 || option != 3)
+                                {
+                                    break;
+                                }
+
+                            } while (option != 1 || option != 2 || option != 3);
 
                             if (option == 1)
                             {
@@ -137,10 +164,12 @@ namespace WorldOfGiants
                     int attackdmg = random.Next(weapon.MinDmg, weapon.MaxDmg) * player.Level / 2;
                     goliath.HealthPoints -= attackdmg;
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    System.Threading.Thread.Sleep(500);
                     Console.WriteLine("--- ATTACK ---");
                     Console.ResetColor();
                     Console.WriteLine($"\nYou strike {goliath.Name}, dealing {attackdmg} damage!");
                     
+
                     if (goliath.HealthPoints <= 0)
                     {
                         Console.WriteLine($"{goliath.Name} falls dead to the ground.");
@@ -161,6 +190,8 @@ namespace WorldOfGiants
 
                             if (player.Level < 10)
                             {
+                                System.Threading.Thread.Sleep(500);
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("--- LEVEL UP ---\n");
                                 Console.WriteLine($"Congratulations, you have reached level {player.Level}!");
                                 Console.WriteLine($"Your max health has increased to {player.MaxHealthPoints}.");
@@ -168,6 +199,7 @@ namespace WorldOfGiants
                             }
                             else if (player.Level == 10)
                             {
+                                System.Threading.Thread.Sleep(500);
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("--- VICTORY ---\n");
                                 Console.ResetColor();

@@ -32,6 +32,7 @@ namespace WorldOfGiants
             Console.WriteLine("\n");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("--- CHARACTER INFO ---\n");
+            Console.ResetColor();
             Console.WriteLine($"Level: {Level}.");
             Console.WriteLine($"Experience: {Experience}.");
             Console.WriteLine($"Experience required to level up: {MaxExperience}.");
@@ -53,7 +54,7 @@ namespace WorldOfGiants
             HealthPoints = MaxHealthPoints;
         }
 
-
+        
 
 
     }

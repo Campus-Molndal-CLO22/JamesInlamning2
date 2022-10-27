@@ -24,7 +24,18 @@ namespace WorldOfGiants
                 Console.WriteLine("2. Display Character Information");
                 Console.WriteLine("3. Exit Game");
 
-                int option = int.Parse(Console.ReadLine());
+
+                int option;
+
+                do
+                {
+                    Int32.TryParse(Console.ReadLine(), out option);
+                    if (option != 1 || option != 2 || option != 3)
+                    {
+                        break;
+                    }
+                } while (option != 1 || option != 2 || option != 3);
+                
                 
                 if (option == 1)
                 {

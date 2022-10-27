@@ -26,6 +26,7 @@ namespace WorldOfGiants
             player.Level = 1;
 
             Console.WriteLine("Welcome, traveler, to the World of Giants.\n");
+            System.Threading.Thread.Sleep(500);
             Console.WriteLine("What is your name?");
             name = Console.ReadLine();
             Console.WriteLine($"\n{name}, your objective is to hunt down and kill Giants.\n");
@@ -34,6 +35,7 @@ namespace WorldOfGiants
             Console.WriteLine("With each level you become stronger, gaining health and attack power.");
             Console.WriteLine("The same is true for the Giants.\n");
             Console.WriteLine("Now, your journey will begin.");
+            System.Threading.Thread.Sleep(1000);
             Console.WriteLine("\nPress ENTER to continue.");
             Console.ReadLine();
             Console.Clear();
